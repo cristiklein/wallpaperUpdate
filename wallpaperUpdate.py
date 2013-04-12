@@ -32,8 +32,9 @@ logging.debug("Output filename: " + outputFilename)
 
 # Download and parse webpage
 webpageDom = lxml.html.parse(webpageUrl)
+imageUrls = [ e.attrib['href'] for e in webpageDom.findall('.//img/..') ]
 
-imageUrls = [ e.attrib['src'] for e in webpageDom.findall('.//img') ]
+# Select an image
 if len(imageUrls) == 0:
 	logging.error("No image URL found in base webpage.")
 	raise ImageUrlNotFoundException()
